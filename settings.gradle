@@ -8,4 +8,6 @@
  */
 
 rootProject.name = 'GraddleApp'
-include('app')
+
+// includeは複数行にわけて記載することもできます。
+include('app', 'lib', 'services:app')
