@@ -386,6 +386,20 @@ BUILD SUCCESSFUL in 583ms
 1 actionable task: 1 executed
 ```
 
+### javadocを生成する
+javaプラグイン中のjavadocタスクを実行すると build/docs/javadocを生成してくれます。
+```
+$ ./gradlew javadoc
+
+$ find . -name javadoc
+./app/build/docs/javadoc
+./app/build/tmp/javadoc
+./lib/build/docs/javadoc
+./lib/build/tmp/javadoc
+./services/app/build/docs/javadoc
+./services/app/build/tmp/javadoc
+```
+
 ### タスクを確認する
 ```
 $ gradle -q tasks --all | grep "services:app:"
@@ -486,6 +500,145 @@ See the report at: file:///Users/tsuyoshi/GradleApp/services/app/build/reports/p
 
 BUILD SUCCESSFUL in 646ms
 5 actionable tasks: 5 executed
+```
+
+### 依存情報を標準出力する
+以下の出力例はlibプロジェクトの依存を表示しています。
+```
+$ ./gradlew :lib:dependencies
+
+> Task :lib:dependencies
+
+------------------------------------------------------------
+Project ':lib'
+------------------------------------------------------------
+
+annotationProcessor - Annotation processors and their dependencies for source set 'main'.
+No dependencies
+
+apiElements - API elements for main. (n)
+No dependencies
+
+archives - Configuration for archive artifacts. (n)
+No dependencies
+
+compileClasspath - Compile classpath for source set 'main'.
+\--- com.google.guava:guava:30.1.1-jre
+     +--- com.google.guava:failureaccess:1.0.1
+     +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+     +--- com.google.code.findbugs:jsr305:3.0.2
+     +--- org.checkerframework:checker-qual:3.8.0
+     +--- com.google.errorprone:error_prone_annotations:2.5.1
+     \--- com.google.j2objc:j2objc-annotations:1.3
+
+compileOnly - Compile only dependencies for source set 'main'. (n)
+No dependencies
+
+default - Configuration for default artifacts. (n)
+No dependencies
+
+implementation - Implementation only dependencies for source set 'main'. (n)
+\--- com.google.guava:guava:30.1.1-jre (n)
+
+runtimeClasspath - Runtime classpath of source set 'main'.
+\--- com.google.guava:guava:30.1.1-jre
+     +--- com.google.guava:failureaccess:1.0.1
+     +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+     +--- com.google.code.findbugs:jsr305:3.0.2
+     +--- org.checkerframework:checker-qual:3.8.0
+     +--- com.google.errorprone:error_prone_annotations:2.5.1
+     \--- com.google.j2objc:j2objc-annotations:1.3
+
+runtimeElements - Elements of runtime for main. (n)
+No dependencies
+
+runtimeOnly - Runtime only dependencies for source set 'main'. (n)
+No dependencies
+
+testAnnotationProcessor - Annotation processors and their dependencies for source set 'test'.
+No dependencies
+
+testCompileClasspath - Compile classpath for source set 'test'.
++--- com.google.guava:guava:30.1.1-jre
+|    +--- com.google.guava:failureaccess:1.0.1
+|    +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+|    +--- com.google.code.findbugs:jsr305:3.0.2
+|    +--- org.checkerframework:checker-qual:3.8.0
+|    +--- com.google.errorprone:error_prone_annotations:2.5.1
+|    \--- com.google.j2objc:j2objc-annotations:1.3
+\--- org.junit.jupiter:junit-jupiter:5.7.2
+     +--- org.junit:junit-bom:5.7.2
+     |    +--- org.junit.jupiter:junit-jupiter:5.7.2 (c)
+     |    +--- org.junit.jupiter:junit-jupiter-api:5.7.2 (c)
+     |    +--- org.junit.jupiter:junit-jupiter-params:5.7.2 (c)
+     |    \--- org.junit.platform:junit-platform-commons:1.7.2 (c)
+     +--- org.junit.jupiter:junit-jupiter-api:5.7.2
+     |    +--- org.junit:junit-bom:5.7.2 (*)
+     |    +--- org.apiguardian:apiguardian-api:1.1.0
+     |    +--- org.opentest4j:opentest4j:1.2.0
+     |    \--- org.junit.platform:junit-platform-commons:1.7.2
+     |         +--- org.junit:junit-bom:5.7.2 (*)
+     |         \--- org.apiguardian:apiguardian-api:1.1.0
+     \--- org.junit.jupiter:junit-jupiter-params:5.7.2
+          +--- org.junit:junit-bom:5.7.2 (*)
+          +--- org.apiguardian:apiguardian-api:1.1.0
+          \--- org.junit.jupiter:junit-jupiter-api:5.7.2 (*)
+
+testCompileOnly - Compile only dependencies for source set 'test'. (n)
+No dependencies
+
+testImplementation - Implementation only dependencies for source set 'test'. (n)
+\--- org.junit.jupiter:junit-jupiter:5.7.2 (n)
+
+testRuntimeClasspath - Runtime classpath of source set 'test'.
++--- com.google.guava:guava:30.1.1-jre
+|    +--- com.google.guava:failureaccess:1.0.1
+|    +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+|    +--- com.google.code.findbugs:jsr305:3.0.2
+|    +--- org.checkerframework:checker-qual:3.8.0
+|    +--- com.google.errorprone:error_prone_annotations:2.5.1
+|    \--- com.google.j2objc:j2objc-annotations:1.3
+\--- org.junit.jupiter:junit-jupiter:5.7.2
+     +--- org.junit:junit-bom:5.7.2
+     |    +--- org.junit.jupiter:junit-jupiter:5.7.2 (c)
+     |    +--- org.junit.jupiter:junit-jupiter-api:5.7.2 (c)
+     |    +--- org.junit.jupiter:junit-jupiter-engine:5.7.2 (c)
+     |    +--- org.junit.jupiter:junit-jupiter-params:5.7.2 (c)
+     |    +--- org.junit.platform:junit-platform-commons:1.7.2 (c)
+     |    \--- org.junit.platform:junit-platform-engine:1.7.2 (c)
+     +--- org.junit.jupiter:junit-jupiter-api:5.7.2
+     |    +--- org.junit:junit-bom:5.7.2 (*)
+     |    +--- org.apiguardian:apiguardian-api:1.1.0
+     |    +--- org.opentest4j:opentest4j:1.2.0
+     |    \--- org.junit.platform:junit-platform-commons:1.7.2
+     |         +--- org.junit:junit-bom:5.7.2 (*)
+     |         \--- org.apiguardian:apiguardian-api:1.1.0
+     +--- org.junit.jupiter:junit-jupiter-params:5.7.2
+     |    +--- org.junit:junit-bom:5.7.2 (*)
+     |    +--- org.apiguardian:apiguardian-api:1.1.0
+     |    \--- org.junit.jupiter:junit-jupiter-api:5.7.2 (*)
+     \--- org.junit.jupiter:junit-jupiter-engine:5.7.2
+          +--- org.junit:junit-bom:5.7.2 (*)
+          +--- org.apiguardian:apiguardian-api:1.1.0
+          +--- org.junit.platform:junit-platform-engine:1.7.2
+          |    +--- org.junit:junit-bom:5.7.2 (*)
+          |    +--- org.apiguardian:apiguardian-api:1.1.0
+          |    +--- org.opentest4j:opentest4j:1.2.0
+          |    \--- org.junit.platform:junit-platform-commons:1.7.2 (*)
+          \--- org.junit.jupiter:junit-jupiter-api:5.7.2 (*)
+
+testRuntimeOnly - Runtime only dependencies for source set 'test'. (n)
+No dependencies
+
+(c) - dependency constraint
+(\*) - dependencies omitted (listed previously)
+
+(n) - Not resolved (configuration is not meant to be resolved)
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+BUILD SUCCESSFUL in 576ms
+1 actionable task: 1 executed
 ```
 
 # 参考になりそうな資料
