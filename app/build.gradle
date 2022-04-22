@@ -11,6 +11,7 @@ plugins {
     id 'application'
 }
 
+// projectで設定される依存性
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
@@ -19,8 +20,10 @@ dependencies {
     implementation 'com.google.guava:guava:30.1.1-jre'
 }
 
+// applicationプラグインと合わせて以下でmainClassを指定するとjavaコマンドを使って実行する代わりにgradle経由でjavaアプリケーションを実行できる(gradle run)
+// see: https://qiita.com/opengl-8080/items/4c1aa85b4737bd362d9e
 application {
-    // Define the main class for the application.
+    // gradle runで実行したいクラスを指定する
     mainClass = 'GraddleApp.App'
 }
 
@@ -30,10 +33,20 @@ tasks.named('test') {
 }
 
 
+// 独自タスク"helloworld"の追加
 task helloWorld {
         description = "This is a very tiny helloWorld."
 
         doLast {
                 println "Hello, world!"
+        }
+}
+
+// build.gradleと同一ディレクトリ中に存在するgradle.propertiesファイルから環境変数を取得する
+task helloenv {
+        description = "Read env info from ./gradle.properties file"
+
+        doLast {
+                println "hoge=${hoge}"
         }
 }

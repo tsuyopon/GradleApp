@@ -366,6 +366,25 @@ BUILD SUCCESSFUL in 575ms
 2 actionable tasks: 2 executed
 ```
 
+### 設定ファイルgradle.propertiesから環境変数を取得する
+
+appプロジェクトにhelloenvタスクが定義されています。
+build.gradleが存在するディレクトリ中にgradle.propertiesファイルがあればそこから環境変数を読み込みます。
+```
+$ cat app/gradle.properties 
+hoge=HOGE
+```
+
+helloenvを実行してみると環境変数を取得・表示しています。
+```
+$ ./gradlew :app:helloenv
+
+> Task :app:helloenv
+hoge=HOGE
+
+BUILD SUCCESSFUL in 583ms
+1 actionable task: 1 executed
+```
 
 ### タスクを確認する
 ```
