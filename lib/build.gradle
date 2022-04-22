@@ -33,22 +33,24 @@ tasks.named('test') {
 /*
  * see: https://qiita.com/opengl-8080/items/0a192b62ee87d8ac7578
  */
-println("lib設定フェーズ１")
+// 設定フェーズはどのlibプロジェクトのどのtaskを実行しても常に表示されてしまうのでコメントアウトしておく。
+// 必要あれば動作確認のためにコメントアウトして確認するのが良い
+//println("lib設定フェーズ１")
 
 task foo {
-    println("lib設定フェーズ２")
+    //println("lib設定フェーズ２")
     doFirst {
         println("lib実行フェーズ１")
     }
 
-    println("lib設定フェーズ３")
+    //println("lib設定フェーズ３")
     doLast {
         println("lib実行フェーズ２")
     }
 }
 
 task bar {
-    println("lib設定フェーズ４")
+    //println("lib設定フェーズ４")
 }
 
-println("lib設定フェーズ５")
+//println("lib設定フェーズ５")
