@@ -105,6 +105,21 @@ $ ls ./app/build/distributions/
 app.tar app.zip
 ```
 
+ちなみにレポジトリ直下のbuild.gradleに「version = '0.0.1-SNAPSHOT'」を後で付与したら次のように名称が変わりました。
+```
+$ find . -name "*SNAPSHOT*"
+./app/build/libs/app-0.0.1-SNAPSHOT.jar
+./app/build/distributions/app-0.0.1-SNAPSHOT.zip
+./app/build/distributions/app-0.0.1-SNAPSHOT.tar
+./lib/build/libs/lib-0.0.1-SNAPSHOT.jar
+./lib/build/distributions/lib-0.0.1-SNAPSHOT.zip
+./lib/build/distributions/lib-0.0.1-SNAPSHOT.tar
+./services/app/build/libs/app-0.0.1-SNAPSHOT.jar
+./services/app/build/distributions/app-0.0.1-SNAPSHOT.zip
+./services/app/build/distributions/app-0.0.1-SNAPSHOT.tar
+./services/build/libs/services-0.0.1-SNAPSHOT.jar
+```
+
 
 ### buildにより生成されたbuildディレクトリを削除する
 buildを実行するとそれぞれのプロジェクトでbuildディレクトリが生成されます。
@@ -453,3 +468,6 @@ See the report at: file:///Users/tsuyoshi/GradleApp/services/app/build/reports/p
 BUILD SUCCESSFUL in 646ms
 5 actionable tasks: 5 executed
 ```
+
+# 参考になりそうな資料
+- https://qiita.com/opengl-8080/items/4c1aa85b4737bd362d9e
