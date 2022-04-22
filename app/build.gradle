@@ -11,7 +11,8 @@ plugins {
     id 'application'
 }
 
-// projectで設定される依存性
+// projectで設定される依存性です。repositoryで指定したレポジトリ情報から取得します。
+// 書式としては「グループ名:名前:バージョン」となります。
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
@@ -32,15 +33,33 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-
 // 独自タスク"helloworld"の追加
 task helloWorld {
         description = "This is a very tiny helloWorld."
 
+        // doFirstはタスクの一番最初の行う処理、doLastはタスクの一番最後に行う処理です
+        doFirst {
+                println "Hello, world! doFirst"
+        }
+
         doLast {
-                println "Hello, world!"
+                println "Hello, world! doLast"
         }
 }
+
+// 依存処理としてgreeting2を呼び出すとgreeting1も呼び出されます
+task greeting1 {
+        doLast {
+                println "Good morning!!"
+        }
+}
+
+task greeting2 (dependsOn:'greeting1') {
+        doLast {
+                println "Good evening!!"
+        }
+}
+
 
 // build.gradleと同一ディレクトリ中に存在するgradle.propertiesファイルから環境変数を取得する
 task helloenv {
