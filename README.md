@@ -350,3 +350,106 @@ foo from service
 BUILD SUCCESSFUL in 575ms
 2 actionable tasks: 2 executed
 ```
+
+
+### タスクを確認する
+```
+$ gradle -q tasks --all | grep "services:app:"
+services:app:run - Runs this project as a JVM application
+services:app:assemble - Assembles the outputs of this project.
+services:app:build - Assembles and tests this project.
+services:app:buildDependents - Assembles and tests this project and all projects that depend on it.
+services:app:buildNeeded - Assembles and tests this project and all projects it depends on.
+services:app:classes - Assembles main classes.
+services:app:clean - Deletes the build directory.
+services:app:jar - Assembles a jar archive containing the main classes.
+services:app:testClasses - Assembles test classes.
+services:app:assembleDist - Assembles the main distributions
+services:app:distTar - Bundles the project as a distribution.
+services:app:distZip - Bundles the project as a distribution.
+services:app:installDist - Installs the project as a distribution as-is.
+services:app:javadoc - Generates Javadoc API documentation for the main source code.
+services:app:buildEnvironment - Displays all buildscript dependencies declared in project ':services:app'.
+services:app:dependencies - Displays all dependencies declared in project ':services:app'.
+services:app:dependencyInsight - Displays the insight into a specific dependency in project ':services:app'.
+services:app:help - Displays a help message.
+services:app:javaToolchains - Displays the detected java toolchains.
+services:app:outgoingVariants - Displays the outgoing variants of project ':services:app'.
+services:app:projects - Displays the sub-projects of project ':services:app'.
+services:app:properties - Displays the properties of project ':services:app'.
+services:app:tasks - Displays the tasks runnable from project ':services:app'.
+services:app:projectReport - Generates a report about your project.
+services:app:check - Runs all checks.
+services:app:test - Runs the unit tests.
+services:app:bar
+services:app:compileJava - Compiles main Java source.
+services:app:compileTestJava - Compiles test Java source.
+services:app:components - Displays the components produced by project ':services:app'. [deprecated]
+services:app:dependencyReport - Generates a report about your library dependencies.
+services:app:dependentComponents - Displays the dependent components of components in project ':services:app'. [deprecated]
+services:app:foo
+services:app:htmlDependencyReport - Generates an HTML report about your library dependencies.
+services:app:model - Displays the configuration model of project ':services:app'. [deprecated]
+services:app:processResources - Processes main resources.
+services:app:processTestResources - Processes test resources.
+services:app:propertyReport - Generates a report about your properties.
+services:app:startScripts - Creates OS specific scripts to run the project as a JVM application.
+services:app:taskReport - Generates a report about your tasks.
+```
+
+独自定義したbarやfooも使えるようになっている
+```
+$ gradle -q tasks --all | grep "services:app:" | grep -ie bar -ie foo
+services:app:bar
+services:app:foo
+```
+
+適用するプラグインでも独自でタスクが定義されます。
+例えば、gradleの基礎として使われているjavaプラグインですが、以下に記載されています。
+- http://gradle.monochromeroad.com/docs/userguide/java_plugin.html
+
+
+app以下に追加したhelloworldも「Other tasks」の下に存在する
+```
+$ ./gradlew :app:tasks --all
+
+(snip)
+
+Other tasks
+-----------
+helloWorld - This is a very tiny helloWorld.
+(snip)
+```
+
+# project-reportプラグイン
+
+
+### 依存情報を生成する
+```
+$ ./gradlew dependencyReport
+
+> Configure project :lib
+lib設定フェーズ１
+lib設定フェーズ２
+lib設定フェーズ３
+lib設定フェーズ４
+lib設定フェーズ５
+
+> Task :dependencyReport
+See the report at: file:///Users/tsuyoshi/GradleApp/build/reports/project/dependencies.txt
+
+> Task :app:dependencyReport
+See the report at: file:///Users/tsuyoshi/GradleApp/app/build/reports/project/dependencies.txt
+
+> Task :lib:dependencyReport
+See the report at: file:///Users/tsuyoshi/GradleApp/lib/build/reports/project/dependencies.txt
+
+> Task :services:dependencyReport
+See the report at: file:///Users/tsuyoshi/GradleApp/services/build/reports/project/dependencies.txt
+
+> Task :services:app:dependencyReport
+See the report at: file:///Users/tsuyoshi/GradleApp/services/app/build/reports/project/dependencies.txt
+
+BUILD SUCCESSFUL in 646ms
+5 actionable tasks: 5 executed
+```

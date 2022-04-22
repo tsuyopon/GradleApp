@@ -11,11 +11,6 @@ plugins {
     id 'application'
 }
 
-repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
-}
-
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
@@ -32,4 +27,13 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+
+task helloWorld {
+        description = "This is a very tiny helloWorld."
+
+        doLast {
+                println "Hello, world!"
+        }
 }

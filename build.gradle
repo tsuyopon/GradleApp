@@ -1,0 +1,21 @@
+allprojects {
+    // ここに記述するとルートプロジェクトを含む全プロジェクトに適用される
+
+    // cf. http://gradle.monochromeroad.com/docs/userguide/project_reports_plugin.html
+    apply plugin: 'project-report'
+}
+
+// プロジェクトrootに存在するbuild.gradleでは、subprojectsを指定することでサブプロジェクト全てに適用する設定を指定できます。
+// ここに記述するとサブプロジェクトのみが対象となります。
+subprojects {
+
+    // cf. http://gradle.monochromeroad.com/docs/userguide/java_plugin.html
+    apply plugin: 'java'
+
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    repositories {
+        mavenCentral()
+    }
+}
