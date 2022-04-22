@@ -5,7 +5,7 @@ package GraddleApp;
 
 public class App {
     public String getGreeting() {
-        return "Hello World!";
+        return "こんにちは世界!";
     }
 
     public static void main(String[] args) {
